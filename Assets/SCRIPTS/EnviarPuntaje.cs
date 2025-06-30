@@ -2,23 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.UI;
+using TMPro;
+
 
 public class EnviarPuntaje : MonoBehaviour
 {
-    public InputField inputNombre;   
-    public InputField inputPuntaje;
+    public TMP_InputField inputNombre;
+    public TMP_InputField inputPuntaje;
 
     public void AlPresionarBoton()
     {
-        StartCoroutine(EnviarDatos());
+        string nombreUsuario = inputNombre.text; 
+        string puntajeTexto = inputPuntaje.text;
+
+        if (string.IsNullOrEmpty(nombreUsuario) || string.IsNullOrEmpty(puntajeTexto))
+        {
+            Debug.LogWarning("Debe ingresar un nombre y un puntaje antes de enviar.");
+            return;
+        }
+
+        if (!int.TryParse(puntajeTexto, out int puntaje))
+        {
+            Debug.LogWarning(" El puntaje debe ser un número válido.");
+            return;
+        }
+
+
+        StartCoroutine(EnviarDatos(nombreUsuario, puntaje));
     }
 
-    IEnumerator EnviarDatos()
+    IEnumerator EnviarDatos(string nombreUsuario, int puntaje)
     {
-        string nombreUsuario = inputNombre.text;
-        int puntaje = int.Parse(inputPuntaje.text);
-
         WWWForm form = new WWWForm();
         form.AddField("nombre_usuario", nombreUsuario);
         form.AddField("puntaje", puntaje);
