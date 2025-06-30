@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.UI;
+using TMPro;
 
 public class ObtenerRanking : MonoBehaviour
 {
-    public Text rankingTexto;
+    public TextMeshProUGUI rankingTexto;
 
     void Start()
     {

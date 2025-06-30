@@ -2,19 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class EnviarPuntaje : MonoBehaviour
 {
-    public string nombreUsuario = "Ana";
-    public int puntaje = 350;
+    public InputField inputNombre;   
+    public InputField inputPuntaje;
 
-    void Start()
+    public void AlPresionarBoton()
     {
         StartCoroutine(EnviarDatos());
     }
 
     IEnumerator EnviarDatos()
     {
+        string nombreUsuario = inputNombre.text;
+        int puntaje = int.Parse(inputPuntaje.text);
+
         WWWForm form = new WWWForm();
         form.AddField("nombre_usuario", nombreUsuario);
         form.AddField("puntaje", puntaje);
