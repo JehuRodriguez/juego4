@@ -8,7 +8,7 @@ public class ObtenerRanking : MonoBehaviour
 {
     public TextMeshProUGUI rankingTexto;
 
-    void Start()
+    public void AlPresionarBoton()
     {
         StartCoroutine(ConsultarRanking());
     }

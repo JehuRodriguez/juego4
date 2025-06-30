@@ -1,20 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class ObtenerPuntaje : MonoBehaviour
 {
-    public string nombreUsuario = "Ana";
+    public TMP_InputField inputNombre;
 
-    void Start()
+    public void AlPresionarBoton()
     {
         StartCoroutine(ConsultarPuntaje());
     }
 
-
     IEnumerator ConsultarPuntaje()
     {
+        string nombreUsuario = inputNombre.text;
+
         WWWForm form = new WWWForm();
         form.AddField("nombre_usuario", nombreUsuario);
 
