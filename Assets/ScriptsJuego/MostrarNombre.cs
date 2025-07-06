@@ -6,7 +6,7 @@ using TMPro;
 
 public class MostrarNombre : MonoBehaviour
 {
-    public TextMeshProUGUI textoNombre;
+    public TextMeshPro textoNombre;
 
     void Start()
     {
