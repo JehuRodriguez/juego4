@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using static pickup;
 
 public class Recolector : MonoBehaviour
 {
@@ -12,9 +13,10 @@ public class Recolector : MonoBehaviour
     {
         if (other.CompareTag("Pickup"))
         {
+            int valor = other.GetComponent<pickup>().valorPuntaje;
+            puntaje += valor;
+            Debug.Log("Recolectado: +" + valor + " puntos");
             Destroy(other.gameObject);
-            puntaje += 10;
-            ActualizarTexto();
         }
     }
 
