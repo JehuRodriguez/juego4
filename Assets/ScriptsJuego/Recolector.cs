@@ -9,6 +9,12 @@ public class Recolector : MonoBehaviour
     public int puntaje = 0;
     public TextMeshProUGUI puntajeTexto;
 
+    void Start()
+    {
+        puntaje = 0; 
+        ActualizarTexto(); 
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Pickup"))
@@ -17,6 +23,7 @@ public class Recolector : MonoBehaviour
             puntaje += valor;
             Debug.Log("Recolectado: +" + valor + " puntos");
             Destroy(other.gameObject);
+            ActualizarTexto();
         }
     }
 
