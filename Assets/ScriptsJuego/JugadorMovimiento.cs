@@ -5,13 +5,39 @@ using UnityEngine;
 public class JugadorMovimiento : MonoBehaviour
 {
     public float velocidad = 5f;
+    public float fuerzaSalto = 7f;
+    private Rigidbody rb;
+    private bool enSuelo = true;
 
-     void Update()
+
+    void Start()
     {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        rb = GetComponent<Rigidbody>();
+    }
 
-        Vector3 movimiento = new Vector3(x, 0, z);
-        transform.Translate(movimiento * velocidad * Time.deltaTime);
+    void FixedUpdate()
+    {
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
+        Vector3 movimiento = new Vector3(horizontal, 0, vertical) * velocidad;
+        rb.velocity = new Vector3(movimiento.x, rb.velocity.y, movimiento.z);
+
+        if (Input.GetKey(KeyCode.Space) && enSuelo)
+        {
+            rb.AddForce(Vector3.up * fuerzaSalto, ForceMode.Impulse);
+            enSuelo = false;
+        }
+
+        Debug.Log("Velocidad: " + rb.velocity);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        
+        if (collision.gameObject.CompareTag("Ground") || collision.contacts[0].normal.y > 0.5f)
+        {
+            enSuelo = true;
+        }
     }
 }

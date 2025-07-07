@@ -20,6 +20,13 @@ public class Recolector : MonoBehaviour
         }
     }
 
+    public void SumarPuntaje(int valor)
+    {
+        puntaje += valor;
+        Debug.Log("Recolectado: +" + valor + " puntos");
+        ActualizarTexto();
+    }
+
     void ActualizarTexto()
     {
         puntajeTexto.text = "Puntaje: " + puntaje;
